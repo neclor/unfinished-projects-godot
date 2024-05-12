@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://u813xsggtl0s"]
+
+[ext_resource type="Script" path="res://game/entities/base_entity/base_entity.gd" id="1_k4olk"]
+[ext_resource type="PackedScene" uid="uid://bbn0fj7kcwnri" path="res://game/entities/components/health_component/health_component.tscn" id="2_0jxb2"]
+
+[node name="BaseEntity" type="CharacterBody2D" groups=["entity"]]
+collision_layer = 4
+script = ExtResource("1_k4olk")
+
+[node name="DieParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 32
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 1000.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+scale_amount_min = 4.0
+scale_amount_max = 8.0
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_0jxb2")]
+
+[connection signal="finished" from="DieParticles" to="." method="_on_die_particles_finished"]

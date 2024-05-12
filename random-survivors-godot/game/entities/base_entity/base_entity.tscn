@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://drcxbkih3osy1"]
+
+[ext_resource type="Script" path="res://game/entities/base_entity/base_entity.gd" id="1_qiag3"]
+[ext_resource type="PackedScene" uid="uid://cjn73a6x8r2wr" path="res://game/entities/base_entity/health_module.tscn" id="2_648si"]
+[ext_resource type="Script" path="res://game/entities/base_entity/base_entity_animated_sprite.gd" id="2_k16ew"]
+[ext_resource type="PackedScene" uid="uid://dfomnhk6tame2" path="res://game/entities/base_entity/melee_attack_module.tscn" id="3_uc1ew"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ugk80"]
+radius = 9.0
+
+[node name="BaseEntity" type="CharacterBody2D" groups=["entities"]]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_qiag3")
+
+[node name="SecTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="StunTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 0.5)
+shape = SubResource("CircleShape2D_ugk80")
+
+[node name="HealthModule" parent="." instance=ExtResource("2_648si")]
+
+[node name="MeleeAttackModule" parent="." instance=ExtResource("3_uc1ew")]
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+script = ExtResource("2_k16ew")
+
+[connection signal="timeout" from="SecTimer" to="." method="_on_sec_timer_timeout"]
+[connection signal="timeout" from="StunTimer" to="." method="_on_stan_timer_timeout"]
+
+[editable path="HealthModule"]
+[editable path="MeleeAttackModule"]

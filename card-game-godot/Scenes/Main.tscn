@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctfjk5yae6650"]
+
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_vxx86"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4i83e"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_vxx86")
+
+[node name="join" type="Button" parent="."]
+offset_left = 1319.0
+offset_top = 636.0
+offset_right = 1568.0
+offset_bottom = 729.0
+text = "join
+"
+
+[node name="host" type="Button" parent="."]
+offset_left = 1314.0
+offset_top = 771.0
+offset_right = 1574.0
+offset_bottom = 876.0
+text = "host"
+
+[node name="StartButton" type="Button" parent="."]
+visible = false
+offset_left = 1325.0
+offset_top = 483.0
+offset_right = 1557.0
+offset_bottom = 582.0
+text = "Start
+"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/Player.tscn", "res://Scenes/Stack.tscn")
+spawn_path = NodePath("..")
+spawn_limit = 4
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4i83e")
+
+[node name="StackMarker" type="Marker2D" parent="."]
+position = Vector2(473, 367)
+
+[node name="MarkerPlayer0" type="Marker2D" parent="."]
+position = Vector2(807, 757)
+
+[node name="MarkerPlayer2" type="Marker2D" parent="."]
+position = Vector2(89, 582)
+
+[node name="MarkerPlayer1" type="Marker2D" parent="."]
+position = Vector2(358, 747)
+
+[node name="MarkerPlayer3" type="Marker2D" parent="."]
+position = Vector2(76, 267)
+
+[node name="MarkerPlayer4" type="Marker2D" parent="."]
+position = Vector2(358, 117)
+
+[node name="MarkerPlayer5" type="Marker2D" parent="."]
+position = Vector2(785, 104)
+
+[node name="MarkerPlayer6" type="Marker2D" parent="."]
+position = Vector2(1187, 247)
+
+[node name="MarkerPlayer7" type="Marker2D" parent="."]
+position = Vector2(1203, 680)
+
+[connection signal="pressed" from="join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

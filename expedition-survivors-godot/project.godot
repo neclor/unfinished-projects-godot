@@ -1,0 +1,50 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Expedition Survivors"
+config/features=PackedStringArray("4.3", "Forward Plus")
+run/max_fps=60
+
+[display]
+
+window/stretch/mode="canvas_items"
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "yellow",
+"res://core/": "gray",
+"res://game/": "blue",
+"res://game/classes/": "yellow",
+"res://game/entities/": "purple",
+"res://game/entities/characters/": "blue",
+"res://game/entities/components/": "purple",
+"res://game/entities/enemies/": "red",
+"res://game/locations/": "purple",
+"res://game/locations/arenas/": "red",
+"res://game/locations/hub/": "blue",
+"res://game/objects/": "yellow",
+"res://resources/": "gray",
+"res://ui/": "teal",
+"res://ui/hud/": "blue",
+"res://ui/menu/": "green"
+}
+
+[layer_names]
+
+2d_physics/layer_1="border"
+2d_physics/layer_2="abyss"
+2d_physics/layer_3="obstacle"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

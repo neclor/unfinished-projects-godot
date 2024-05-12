@@ -1,0 +1,155 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3png0fa6apj8"]
+
+[ext_resource type="PackedScene" uid="uid://des73ybphh5gl" path="res://ship/ship.tscn" id="1_15ujn"]
+[ext_resource type="Script" path="res://sea/sea.gd" id="1_yryyo"]
+[ext_resource type="Script" path="res://sea/camera_2d.gd" id="2_vtp6i"]
+
+[node name="Sea" type="Node2D"]
+script = ExtResource("1_yryyo")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="StartTorped" type="Button" parent="HUD"]
+visible = false
+offset_right = 125.0
+offset_bottom = 60.0
+text = "start torped"
+
+[node name="Restart" type="Button" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -124.0
+offset_bottom = 53.0
+grow_horizontal = 0
+text = "restart
+"
+
+[node name="UiConatiner" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MyShipRotation" type="VSlider" parent="HUD/UiConatiner"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -204.0
+offset_right = 37.0
+grow_vertical = 0
+max_value = 360.0
+
+[node name="EnemyShipRotation" type="VSlider" parent="HUD/UiConatiner"]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -37.0
+offset_top = -219.0
+grow_horizontal = 0
+grow_vertical = 0
+max_value = 360.0
+
+[node name="TorpedRadius" type="TextEdit" parent="HUD/UiConatiner"]
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = 57.0
+offset_top = 386.0
+offset_right = 246.0
+offset_bottom = 437.0
+text = "50"
+placeholder_text = "TorpedTurningRadius"
+
+[node name="TorpedSpeed" type="TextEdit" parent="HUD/UiConatiner"]
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = 55.0
+offset_top = 476.0
+offset_right = 244.0
+offset_bottom = 527.0
+text = "20"
+placeholder_text = "TorpedSpeed(20)"
+
+[node name="MyShipSpeed" type="TextEdit" parent="HUD/UiConatiner"]
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = 55.0
+offset_top = 571.0
+offset_right = 244.0
+offset_bottom = 622.0
+text = "10"
+placeholder_text = "MyShipSpeed(10)"
+
+[node name="EnemyShipSpeed" type="TextEdit" parent="HUD/UiConatiner"]
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = 863.0
+offset_top = 447.0
+offset_right = 1073.0
+offset_bottom = 512.0
+text = "10"
+placeholder_text = "EnemyShipSpeed (10)"
+
+[node name="EnemyShipSpeed5Sec" type="TextEdit" parent="HUD/UiConatiner"]
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = 866.0
+offset_top = 539.0
+offset_right = 1072.0
+offset_bottom = 620.0
+text = "10"
+placeholder_text = "EnemyShipSpeed
+after 10 sec (10)"
+
+[node name="EnemyShipDist" type="TextEdit" parent="HUD/UiConatiner"]
+auto_translate_mode = 1
+layout_mode = 0
+offset_left = 861.0
+offset_top = 359.0
+offset_right = 1076.0
+offset_bottom = 421.0
+text = "500"
+placeholder_text = "EnemyShipDistance (500)"
+
+[node name="StartSimulation" type="Button" parent="HUD/UiConatiner"]
+layout_mode = 0
+offset_left = 457.0
+offset_top = 574.0
+offset_right = 716.0
+offset_bottom = 637.0
+text = "start simulation"
+
+[node name="Label" type="Label" parent="HUD/UiConatiner"]
+layout_mode = 0
+offset_left = 438.0
+offset_top = 507.0
+offset_right = 740.0
+offset_bottom = 556.0
+text = "Значения вводить ОБЯЗАТЕЛЬНО !"
+
+[node name="MyShip" parent="." instance=ExtResource("1_15ujn")]
+modulate = Color(0, 1, 1, 1)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Camera2D" type="Camera2D" parent="MyShip"]
+script = ExtResource("2_vtp6i")
+
+[node name="EnemyShip" parent="." instance=ExtResource("1_15ujn")]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(500, 0)
+speed_after_5_sec = 100
+
+[connection signal="pressed" from="HUD/StartTorped" to="." method="_on_start_torped_pressed"]
+[connection signal="pressed" from="HUD/Restart" to="." method="_on_restart_pressed"]
+[connection signal="value_changed" from="HUD/UiConatiner/MyShipRotation" to="." method="_on_my_ship_rotation_value_changed"]
+[connection signal="value_changed" from="HUD/UiConatiner/EnemyShipRotation" to="." method="_on_enemy_ship_rotation_value_changed"]
+[connection signal="text_changed" from="HUD/UiConatiner/EnemyShipDist" to="." method="_on_enemy_ship_dist_text_changed"]
+[connection signal="pressed" from="HUD/UiConatiner/StartSimulation" to="." method="_on_start_simulation_pressed"]

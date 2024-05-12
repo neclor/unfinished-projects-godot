@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdxppnn5hfek8"]
+
+[ext_resource type="Script" path="res://Scripts/Card.gd" id="1_y78e8"]
+[ext_resource type="Texture2D" uid="uid://b1ipcu43opy3f" path="res://Assets/Cards/Spades/A.png" id="2_wvho8"]
+
+[node name="Card" type="Node2D"]
+script = ExtResource("1_y78e8")
+
+[node name="Card" type="Sprite2D" parent="."]
+texture = ExtResource("2_wvho8")
+centered = false

@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://fi3av3qb4y7e"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_lir30"]
+[ext_resource type="Texture2D" uid="uid://cc7c1e6c01mh3" path="res://Assets/Avatars/Floppa.png" id="2_3ivgr"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ns0dr"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath("Name:text")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath("Rank:text")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_lir30")
+
+[node name="Avatar" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_3ivgr")
+centered = false
+
+[node name="Name" type="Label" parent="."]
+offset_left = 94.0
+offset_top = 5.0
+offset_right = 175.0
+offset_bottom = 31.0
+text = "Test name"
+
+[node name="Rank" type="Label" parent="."]
+offset_left = 95.0
+offset_top = 39.0
+offset_right = 191.0
+offset_bottom = 67.0
+
+[node name="CardMarker1" type="Marker2D" parent="."]
+position = Vector2(8, 100)
+scale = Vector2(0.5, 0.5)
+
+[node name="CardMarker2" type="Marker2D" parent="."]
+position = Vector2(87, 101)
+scale = Vector2(0.5, 0.5)
+
+[node name="CardMarker3" type="Marker2D" parent="."]
+position = Vector2(46, 101)
+scale = Vector2(0.5, 0.5)
+
+[node name="CardMarker4" type="Marker2D" parent="."]
+position = Vector2(131, 102)
+scale = Vector2(0.5, 0.5)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ns0dr")

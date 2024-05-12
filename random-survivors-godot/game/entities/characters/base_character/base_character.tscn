@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://8ct7ehvtnoe2"]
+
+[ext_resource type="PackedScene" uid="uid://drcxbkih3osy1" path="res://game/entities/base_entity/base_entity.tscn" id="1_4ctvh"]
+[ext_resource type="Script" path="res://game/entities/characters/base_character/base_character.gd" id="1_avq6b"]
+[ext_resource type="Script" path="res://game/entities/characters/base_character/base_character_camera.gd" id="4_mblw1"]
+
+[node name="BaseCharacter" groups=["characters"] instance=ExtResource("1_4ctvh")]
+collision_layer = 48
+script = ExtResource("1_avq6b")
+
+[node name="AbilityCooldownTimer" type="Timer" parent="." index="2"]
+one_shot = true
+
+[node name="AnimatedSprite" parent="." index="6"]
+offset = Vector2(0, -11.5)
+
+[node name="Camera" type="Camera2D" parent="." index="7"]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.05
+drag_top_margin = 0.05
+drag_right_margin = 0.05
+drag_bottom_margin = 0.05
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource("4_mblw1")
+
+[node name="ItemContainer" type="Node2D" parent="." index="8"]
+
+[connection signal="timeout" from="AbilityCooldownTimer" to="." method="_on_ability_cooldown_timer_timeout"]
+
+[editable path="HealthModule"]
+[editable path="MeleeAttackModule"]

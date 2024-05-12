@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://c15wkcolgx357"]
+
+[ext_resource type="Script" path="res://torpeda/torpeda.gd" id="1_uamiw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qdf3u"]
+radius = 1.0
+height = 4.0
+
+[node name="Torpeda" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_uamiw")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_qdf3u")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -2, -1, -1, -1, 1, 0, 2, 1, 1, 1, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="TracerTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="LiveTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="TracerTimer" to="." method="_on_tracer_timer_timeout"]
+[connection signal="timeout" from="LiveTimer" to="." method="_on_live_timer_timeout"]
